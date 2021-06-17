@@ -4,9 +4,21 @@
 
 @section('content')
 
+
+
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
+
+        @if (session('status'))
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ session('status') }}
+            </div>
+        @endif
+
             <div class="card">
                 <div class="card-header">Remover Marca</div>
                 <div class="card-body">
@@ -17,7 +29,7 @@
                         <hr>
                         <p class="card-text"><strong>Nome: </strong>{{ $marca->nome }}</p>
                         <br>
-                        <a href="{{ url()->previous() }}" class="btn btn-light">Voltar</a>
+                        <a href="{{ route('marcas.index') }}" class="btn btn-light">Voltar</a>
                         <button class="btn btn-danger" type="submit">Remover</button>
                     </form>
                 </div>

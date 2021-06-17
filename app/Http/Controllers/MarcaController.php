@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Marca;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Produto;
 
 class MarcaController extends Controller
 {
@@ -109,10 +110,18 @@ class MarcaController extends Controller
      */
     public function destroy($id)
     {
-        $marca = Marca::find($id);
+        if(Produto::where('marca_id', '=', $id)->count()){
+            $msg = "Não é possível remover esta marca.
+                    O(s) produto(s) com id: ";
+            $produtos = Produto::where('marca_id', '=', $id)->get();
+            foreach($produtos as $produto){
+                $msg .= $produto->id . ' ';
+            }
+            $msg .= ', está(estão) relacionado(s) com esta marca.';
+            return redirect()->route('marcas.remover', $id)->with('status', $msg);
+        }
 
-        $marca->delete();
-
+        Marca::find($id)->delete();
         return redirect()->route('marcas.index')->with('status', 'Marca removida com sucesso!');
     }
 
