@@ -21,6 +21,7 @@
                 <thead class="thead-dark">
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Produtos</th>
                     <th scope="col">Ações</th>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ $marca->id }}</td>
                             <td>{{ $marca->nome }}</td>
+                            <td><a href="{{ route('marcas.produtos', $marca->id) }}">Listar Produtos</a></td>
                             <td>
                                 <a href="{{ route('marcas.edit', $marca->id) }}"><span class="material-icons">edit</span></a>
                                 <a href="{{ route('marcas.remover', $marca->id) }}"><span class="material-icons">delete</span></a>

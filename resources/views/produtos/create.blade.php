@@ -43,6 +43,17 @@
                         </div>
                     </div>
                 </div>
+
+                <h4 class="card-title">Marca</h4>
+                <hr>
+                <div class="form-group">
+                    <label for="marca_id">Selecione a Marca do produto</label>
+                    <select name="marca_id" id="" class="form-control">
+                        @foreach ($marcas as $marca)
+                            <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <a href="{{ url()->previous() }}" class="btn btn-light">Voltar</a>
                 <button class="btn btn-primary" type="submit">Cadastrar</button>
             </form>

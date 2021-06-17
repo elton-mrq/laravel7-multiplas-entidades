@@ -15,11 +15,15 @@
                     <p class="card-text"><strong>Nome: </strong>{{ $marca->nome }}</p>
                 </div>
             </div>
+
+        </div>
+        <div class="col-md-2"></div>
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <br>
             <a href="{{ url()->previous() }}" class="btn btn-light">Voltar</a>
         </div>
-        <br>
-        <br>
         <div class="col-md-2"></div>
     </div>
-
 @endsection

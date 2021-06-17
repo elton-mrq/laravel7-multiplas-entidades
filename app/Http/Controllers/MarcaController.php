@@ -45,7 +45,7 @@ class MarcaController extends Controller
 
         Marca::create($request->all());
 
-        return redirect()->route('inicio')->with('status', 'Marca adicionada com sucesso!');
+        return redirect()->route('marcas.index')->with('status', 'Marca adicionada com sucesso!');
     }
 
     /**
@@ -123,5 +123,11 @@ class MarcaController extends Controller
         ]);
 
         return $validator;
+    }
+
+    public function produtos($id)
+    {
+        $marca = Marca::find($id);
+        return view('marcas.produtos', compact('marca'));
     }
 }

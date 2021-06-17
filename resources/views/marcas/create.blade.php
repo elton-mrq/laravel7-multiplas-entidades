@@ -16,9 +16,10 @@
                         <hr>
                         <div class="form-group">
                             <label for="nome">Nome</label>
-                            <input type="text" class="form-control" name="nome">
+                            <input type="text" class="form-control @error('nome') is-invalid @enderror " name="nome">
+                            <span class="invalid-feedback">@error('nome') {{ $message }} @enderror</span>
                         </div>
-                        <a href="{{ url()->previous() }}" class="btn btn-ligth">Voltar</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-light">Voltar</a>
                         <button class="btn btn-success" type="submit">Cadastrar</button>
                     </form>
                 </div>

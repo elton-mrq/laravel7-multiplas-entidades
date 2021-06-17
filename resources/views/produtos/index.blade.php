@@ -6,7 +6,6 @@
 
     <div class="row">
         <div class="col-md-12">
-
             @if (session('status'))
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -22,7 +21,7 @@
                         <th scope="col">Descrição</th>
                         <th scope="col">Preço</th>
                         <th scope="col">Cor</th>
-                        <th scope="col">Peso</th>
+                        <th scope="col">Marca</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -32,7 +31,7 @@
                             <td>{{ $produto->descricao }}</td>
                             <td>{{ 'R$ ' . number_format($produto->preco, "2", ",", ".") }}</td>
                             <td>{{ $produto->cor }}</td>
-                            <td>{{ $produto->peso }} Kg</td>
+                            <td>{{ $produto->marca->nome }}</td>
                             <td>
                                 <a href="{{ route('produtos.edit', $produto->id) }}"><span class="material-icons">edit</span></i></a>
                                 <a href="{{ route('produtos.remover', $produto->id) }}"><span class="material-icons">delete</span></a>
@@ -43,7 +42,11 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-2">{{$produtos->links()}}</div>
+        <div class="col-md-5"></div>
     </div>
+
     <br>
     <a href="{{ route('produtos.create') }}" class="btn btn-primary">Adicionar</a>
 @endsection

@@ -19,5 +19,6 @@ Route::get('/', [ProdutoController::class, 'index'])->name('inicio');
 Route::get('/produtos/remover/{id}', [ProdutoController::class, 'remover'])->name('produtos.remover');
 Route::resource('produtos', 'ProdutoController');
 
+Route::get('/marcas/produtos/{id}', [MarcaController::class, 'produtos'])->name('marcas.produtos');
 Route::get('/marcas/remover/{id}', [MarcaController::class, 'remover'])->name('marcas.remover');
 Route::resource('marcas', 'MarcaController');

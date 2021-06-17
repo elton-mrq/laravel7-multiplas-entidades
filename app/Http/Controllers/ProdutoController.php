@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Validator;
 
 class ProdutoController extends Controller
@@ -14,9 +16,19 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::all();
+
+        $qtd            = $request['qtd'] ?: 2;
+        $page           = $request['page'] ?: 1;
+
+        Paginator::currentPageResolver(function() use ($page){
+            return $page;
+        });
+
+        $produtos = Produto::paginate($qtd);
+
+        $produtos = $produtos->appends(Request::capture()->except('page'));
 
         return view('produtos.index', compact('produtos'));
     }
@@ -28,7 +40,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('produtos.create');
+        $marcas = Marca::all();
+        return view('produtos.create', compact('marcas'));
     }
 
     /**
@@ -70,9 +83,10 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
+        $marcas = Marca::all();
         $produto = Produto::find($id);
 
-        return view('produtos.edit', compact('produto'));
+        return view('produtos.edit', compact('produto', 'marcas'));
     }
 
     /**

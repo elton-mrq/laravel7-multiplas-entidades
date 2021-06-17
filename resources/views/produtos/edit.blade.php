@@ -44,6 +44,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="marca_id">Selecione a Marca do Produto</label>
+                    <select name="marca_id" id="" class="form-control">
+                       @foreach ($marcas as $marca)
+                            <option value="{{$marca->id}}" {{ (isset($produto->marca_id) && $produto->marca_id == $marca->id ? 'selected' : '') }}>{{ $marca->nome }}</option>
+                       @endforeach
+                    </select>
+                </div>
                 <a href="{{ url()->previous() }}" class="btn btn-light">Voltar</a>
                 <button class="btn btn-primary" type="submit">Atualizar</button>
             </form>
