@@ -12,6 +12,7 @@
             <p class="cad-text"><strong>Preço: </strong>R$ {{ number_format($produto->preco, 2, ',', '.') }}</p>
             <p class="cad-text"><strong>Cor: </strong>{{ $produto->cor }}</p>
             <p class="cad-text"><strong>Peso: </strong>{{ $produto->peso }}</p>
+            <p class="cad-text"><strong>Marca: </strong>{{ $produto->marca->nome }}</p>
         </div>
     </div>
     <br>

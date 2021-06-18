@@ -21,12 +21,17 @@ class ProdutoController extends Controller
 
         $qtd            = $request['qtd'] ?: 2;
         $page           = $request['page'] ?: 1;
+        $buscar         = $request['buscar'];
 
         Paginator::currentPageResolver(function() use ($page){
             return $page;
         });
 
-        $produtos = Produto::paginate($qtd);
+        if($buscar){
+            $produtos = Produto::where('descricao', 'LIKE', $buscar.'%')->paginate($qtd);
+        }else {
+            $produtos = Produto::paginate($qtd);
+        }
 
         $produtos = $produtos->appends(Request::capture()->except('page'));
 

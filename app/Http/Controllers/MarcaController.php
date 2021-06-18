@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Validator;
 use App\Produto;
 
@@ -14,11 +15,27 @@ class MarcaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $marcas = Marca::all();
+
+        $qtd            = $request['qtd'] ?: 2;
+        $page           = $request['page'] ?: 1;
+        $buscar         = $request['buscar'];
+
+        Paginator::currentPageResolver(function() use ($page){
+            return $page;
+        });
+
+        if($buscar){
+            $marcas = Marca::where('nome', 'LIKE', $buscar.'%')->paginate($qtd);
+        }else {
+            $marcas = Marca::paginate($qtd);
+        }
+
+        $marcas = $marcas->appends(Request::capture()->except('page'));
 
         return view('marcas.index', compact('marcas'));
+
     }
 
     /**
